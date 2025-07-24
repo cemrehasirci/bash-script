@@ -11,7 +11,7 @@ fi
 DIZIN_BOYUTU=$(du -ch $dizin | grep total)
 
 #dosya sayısı
-DOSYA_SAYISI=$(ls $dizin | wc -)
+DOSYA_SAYISI=$(ls $dizin | wc -l)
 
 #en büyük boyutlu dosya ve boyutu
 BUYUK_DOSYA=$(du -sh $dizin)
