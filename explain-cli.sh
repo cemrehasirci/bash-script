@@ -11,19 +11,19 @@ fi
 SAHIBI=$(stat -c %U $dizin)
 
 #klasör sayısı
-KLASOR_SAYISI=$(find . $dizin -type f | wc -l)
+KLASOR_SAYISI=$(find . $dizin -mindepth 1  -maxdepth 1 -type d | grep "$dizin" | wc -l )
 
 #dosya sayısı
-DOSYA_SAYISI=$(find . $dizin -type d | wc -l)
+DOSYA_SAYISI=$(find . $dizin  -maxdepth 1 -type f | grep "$dizin" | wc -l)
 
 #dizin boyutu
 DIZIN_BOYUTU=$(du -ch $dizin | grep total)
 
 #en büyük boyutlu dosya ve boyutu
-BUYUK_DOSYA=$(du -sh $dizin)
+BUYUK_DOSYA=$(du -ah $dizin --max-depth=1 | sort -rn | head -n 2 | tail -1 )
 
 #en küçük boyutlu dosya ve boyutu
-KUCUK_DOSYA=$(du -ah $dizin | sort -r | head -n 1)
+KUCUK_DOSYA=$(du -ah $dizin --max-depth=1 | sort -rn | tail -1)
 
 #içindeki dosyalar ve uzantıları
 DOSYALARI=$(find . $dizin -type f -name "*" | grep "$dizin")
@@ -35,5 +35,5 @@ echo "Dizindeki dosya sayısı: $DOSYA_SAYISI"
 echo "Dizin boyutu: $DIZIN_BOYUTU"
 echo "Dizindeki en büyük boyutlu dosya: $BUYUK_DOSYA"
 echo "Dizindeki en küçük boyutlu dosya: $KUCUK_DOSYA"
-echo "Dizindeki dosyalar ve uzantıları: "
-echo "$DOSYALARI"
+#echo "Dizindeki dosyalar ve uzantıları: "
+#echo "$DOSYALARI"
