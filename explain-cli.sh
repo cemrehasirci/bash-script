@@ -26,7 +26,7 @@ BUYUK_DOSYA=$(du -ah $dizin --max-depth=1 | sort -rn | head -n 2 | tail -1 )
 KUCUK_DOSYA=$(du -ah $dizin --max-depth=1 | sort -rn | tail -1)
 
 #içindeki dosyalar ve uzantıları
-DOSYALARI=$(find . $dizin -type f -name "*" | grep "$dizin")
+DOSYALARI=$(find .  $dizin -type f -name "*.*" | grep "$dizin" | sed -n 's/.*\././p' | sort | uniq )
 
 echo "Çalışılan dizin: $dizin"
 echo "Dizin sahibi: $SAHIBI"
@@ -35,5 +35,5 @@ echo "Dizindeki dosya sayısı: $DOSYA_SAYISI"
 echo "Dizin boyutu: $DIZIN_BOYUTU"
 echo "Dizindeki en büyük boyutlu dosya: $BUYUK_DOSYA"
 echo "Dizindeki en küçük boyutlu dosya: $KUCUK_DOSYA"
-#echo "Dizindeki dosyalar ve uzantıları: "
-#echo "$DOSYALARI"
+echo "Dizindeki dosyalar ve uzantıları: "
+echo "$DOSYALARI"
